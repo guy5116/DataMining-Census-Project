@@ -31,14 +31,21 @@ def parser_args():
     parser.add_argument("-a", "--all", action="store_true", help="Runs all workflows")
     
     parser.add_argument("-g", "--graph", action="store_true", help="Runs all graphs")
-
+    parser.add_argument('-m', '--models', action='store_true', help='Runs all model graphs')
     return parser
 
 # Collects the parser and runs the functions based on what the paser stores as True
 def run_args(parser):
     print(f"{txt}\n")
     args = parser.parse_args()
-
+    if args.models:
+        models = train_models(build_full_data())
+        confusionMatices(models)
+        rocCurve(models)
+        precisionRecallCurves(models)
+        df_encoded = build_full_data()
+        kfoldBoxPlots(models, df_encoded)
+        cleanVsImputed(models)
     if args.graph:
         histo()
         missingBarChart()
