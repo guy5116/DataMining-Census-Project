@@ -47,12 +47,36 @@ def encode_dummies(df):
     # df_encoded.to_csv('output/test.csv')
     return df_encoded
 
-# Uses a model to impute a data frame
+# Imputes the missing values in the dirty data frame
+# Uses the clean encoded data frame to line up the columns and help train the imputer
 # returns the clean data frame
-def imputer_cleaning(df, model):
+def imputer_cleaning(dirty_df, clean_df_encoded):
+    # Encode and match the clean columns (categories missing here become False)
+    encoded = encode_dummies(dirty_df).reindex(columns=clean_df_encoded.columns, fill_value=False).astype(float)
+
+    # get_dummies drops NaN, so put the NaN back into that feature's dummy columns
+    missing_cols = dirty_df.columns[dirty_df.isna().any()]
+    for col in missing_cols:
+        encoded.loc[dirty_df[col].isna().values, encoded.columns.str.startswith(col + "_")] = np.nan
+
+    # Fit on clean + dirty rows so the imputer learns from the clean data too
     imputer = IterativeImputer(random_state=42)
-    clean_df = pd.DataFrame(imputer.fit_transform(df), columns=df.columns)
-    return clean_df
+    imputer.fit(pd.concat([clean_df_encoded.astype(float), encoded]))
+    clean_df = pd.DataFrame(imputer.transform(encoded), columns=encoded.columns)
+
+    # Turn the imputed scores back into one category per row
+    # (drop_first removed one category, its score is 1 - sum of the others)
+    for col in missing_cols:
+        group = clean_df.columns[clean_df.columns.str.startswith(col + "_")]
+        scores = clean_df[group]
+        best = scores.idxmax(axis=1)
+        is_base = scores.max(axis=1) < 1 - scores.sum(axis=1)
+        clean_df[group] = False
+        for c in group:
+            clean_df.loc[(best == c) & ~is_base, c] = True
+
+    # Back to the original types (bool dummies/income, int numbers)
+    return clean_df.astype(clean_df_encoded.dtypes)
 
 # Takes two data frames and merges them
 # Returns the merged data frame

@@ -47,7 +47,7 @@ def info_gain_numeric(df, feature, target='income'):
         # p = 0 or 1 gives log2(0); numpy wanrs the reurns nan, which we
         # turn into 0 below
         with np.errstate(divide='ignore', invalid='ignore'):
-            h = -(p * np.log2(p) + (1 - p) * np.log2(2 - 1))
+            h = -(p * np.log2(p) + (1 - p) * np.log2(1 - p))
         return np.nan_to_num(h)
     
     # Weighted entropy of the left and right sides for every threshold

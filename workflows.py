@@ -51,17 +51,16 @@ def XGB_workflow():
 
     # Encodes the data
     clean_df_encoded = encode_dummies(clean_df)
-    dirty_df_encoded = encode_dummies(dirty_df)
 
     # Makes a model with only clean data
     c_model, X, y = make_XGB_model(clean_df_encoded)
     model_testing(c_model, X, y)
 
     # Cleans the data using our model
-    c_dirty_df = imputer_cleaning(dirty_df_encoded, c_model)
+    c_dirty_df = imputer_cleaning(dirty_df, clean_df_encoded)
 
     # Merges the now clean data with the already clean data
-    full_df = merge_data(clean_df_encoded, dirty_df_encoded)
+    full_df = merge_data(clean_df_encoded, c_dirty_df)
     full_df_encoded = encode_dummies(full_df)
 
     # Makes a model with the merged data
@@ -93,17 +92,16 @@ def KNN_workflow():
 
     # Encodes the data
     clean_df_encoded = encode_dummies(clean_df)
-    dirty_df_encoded = encode_dummies(dirty_df)
 
     # Makes a model with only clean data
     c_model, X, y = make_KNN_model(clean_df_encoded)
     model_testing(c_model, X, y)
 
     # Cleans the data using our model
-    c_dirty_df = imputer_cleaning(dirty_df_encoded, c_model)
+    c_dirty_df = imputer_cleaning(dirty_df, clean_df_encoded)
 
     # Merges the now clean data with the already clean data
-    full_df = merge_data(clean_df_encoded, dirty_df_encoded)
+    full_df = merge_data(clean_df_encoded, c_dirty_df)
     full_df_encoded = encode_dummies(full_df)
 
     # Makes a model with the merged data
@@ -133,17 +131,16 @@ def DTC_workflow():
 
     # Encodes the data
     clean_df_encoded = encode_dummies(clean_df)
-    dirty_df_encoded = encode_dummies(dirty_df)
 
     # Makes a model with only clean data
     c_model, X, y = make_DTC_model(clean_df_encoded)
     model_testing(c_model, X, y)
 
     # Cleans the data using our model
-    c_dirty_df = imputer_cleaning(dirty_df_encoded, c_model)
+    c_dirty_df = imputer_cleaning(dirty_df, clean_df_encoded)
 
     # Merges the now clean data with the already clean data
-    full_df = merge_data(clean_df_encoded, dirty_df_encoded)
+    full_df = merge_data(clean_df_encoded, c_dirty_df)
     full_df_encoded = encode_dummies(full_df)
 
     # Makes a model with the merged data
@@ -172,17 +169,16 @@ def ETC_workflow():
 
     # Encodes the data
     clean_df_encoded = encode_dummies(clean_df)
-    dirty_df_encoded = encode_dummies(dirty_df)
 
     # Makes a model with only clean data
     c_model, X, y = make_ETC_model(clean_df_encoded)
     model_testing(c_model, X, y)
 
     # Cleans the data using our model
-    c_dirty_df = imputer_cleaning(dirty_df_encoded, c_model)
+    c_dirty_df = imputer_cleaning(dirty_df, clean_df_encoded)
 
     # Merges the now clean data with the already clean data
-    full_df = merge_data(clean_df_encoded, dirty_df_encoded)
+    full_df = merge_data(clean_df_encoded, c_dirty_df)
     full_df_encoded = encode_dummies(full_df)
 
     # Makes a model with the merged data
@@ -211,14 +207,13 @@ def run_xgboost_kfold_workflow():
     df = loadData()
     clean_df, dirty_df = split_data(df)
     clean_df_encoded = encode_dummies(clean_df)
-    dirty_df_encoded = encode_dummies(dirty_df)
     
     print("\n--- Evaluating XGB with CLEAN Data Only ---")
     c_model, _, _ = make_XGB_model(clean_df_encoded)
     evaluate_with_kfold(c_model, clean_df_encoded.drop(columns=["income"]), clean_df_encoded["income"], n_splits=10)
 
-    c_dirty_df = imputer_cleaning(dirty_df_encoded, c_model)
-    full_df = merge_data(clean_df_encoded, dirty_df_encoded)
+    c_dirty_df = imputer_cleaning(dirty_df, clean_df_encoded)
+    full_df = merge_data(clean_df_encoded, c_dirty_df)
     full_df_encoded = encode_dummies(full_df)
     
     print("\n--- Evaluating XGB with FULL (Imputed) Dataset ---")
@@ -242,14 +237,13 @@ def run_knn_kfold_workflow():
     df = loadData()
     clean_df, dirty_df = split_data(df)
     clean_df_encoded = encode_dummies(clean_df)
-    dirty_df_encoded = encode_dummies(dirty_df)
     
     print("\n--- Evaluating KNN with CLEAN Data Only ---")
     c_model, _, _ = make_KNN_model(clean_df_encoded)
     evaluate_with_kfold(c_model, clean_df_encoded.drop(columns=["income"]), clean_df_encoded["income"], n_splits=10)
 
-    c_dirty_df = imputer_cleaning(dirty_df_encoded, c_model)
-    full_df = merge_data(clean_df_encoded, dirty_df_encoded)
+    c_dirty_df = imputer_cleaning(dirty_df, clean_df_encoded)
+    full_df = merge_data(clean_df_encoded, c_dirty_df)
     full_df_encoded = encode_dummies(full_df)
     
     print("\n--- Evaluating KNN with FULL (Imputed) Dataset ---")
@@ -274,14 +268,13 @@ def run_dtc_kfold_workflow():
     df = loadData()
     clean_df, dirty_df = split_data(df)
     clean_df_encoded = encode_dummies(clean_df)
-    dirty_df_encoded = encode_dummies(dirty_df)
     
     print("\n--- Evaluating DTC with CLEAN Data Only ---")
     c_model, _, _ = make_DTC_model(clean_df_encoded)
     evaluate_with_kfold(c_model, clean_df_encoded.drop(columns=["income"]), clean_df_encoded["income"], n_splits=10)
 
-    c_dirty_df = imputer_cleaning(dirty_df_encoded, c_model)
-    full_df = merge_data(clean_df_encoded, dirty_df_encoded)
+    c_dirty_df = imputer_cleaning(dirty_df, clean_df_encoded)
+    full_df = merge_data(clean_df_encoded, c_dirty_df)
     full_df_encoded = encode_dummies(full_df)
     
     print("\n--- Evaluating DTC with FULL (Imputed) Dataset ---")
@@ -305,14 +298,13 @@ def run_etc_kfold_workflow():
     df = loadData()
     clean_df, dirty_df = split_data(df)
     clean_df_encoded = encode_dummies(clean_df)
-    dirty_df_encoded = encode_dummies(dirty_df)
     
     print("\n--- Evaluating ETC with CLEAN Data Only ---")
     c_model, _, _ = make_ETC_model(clean_df_encoded)
     evaluate_with_kfold(c_model, clean_df_encoded.drop(columns=["income"]), clean_df_encoded["income"], n_splits=10)
 
-    c_dirty_df = imputer_cleaning(dirty_df_encoded, c_model)
-    full_df = merge_data(clean_df_encoded, dirty_df_encoded)
+    c_dirty_df = imputer_cleaning(dirty_df, clean_df_encoded)
+    full_df = merge_data(clean_df_encoded, c_dirty_df)
     full_df_encoded = encode_dummies(full_df)
     
     print("\n--- Evaluating ETC with FULL (Imputed) Dataset ---")
