@@ -14,7 +14,7 @@ def loadData():
 
     # Prep it for modeling
     # Set over 50k to true and under to false
-    df.drop_duplicates
+    df.drop_duplicates()
     mapping = {"<=50K": False, ">50K": True}
     df["income"] = df["income"].map(mapping)
 
