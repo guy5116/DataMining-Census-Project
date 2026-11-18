@@ -4,11 +4,13 @@ from graphs import *
 from model import *
 from preprocessing import *
 
-
+# Rencodes the Data Frame with default categories
+# Switches it from multiple boolean columns to a categorical columns
+# Also creates a histogram from this CSV
 def create_final_csv(full_df_encoded):
     dummy_cols = [
         col for col in full_df_encoded.columns if "_" in col
-    ]  # or filter by your known prefix list
+    ]
     non_dummy_cols = [c for c in full_df_encoded.columns if c not in dummy_cols]
     decoded = pd.from_dummies(
         full_df_encoded[dummy_cols],
@@ -29,11 +31,17 @@ def create_final_csv(full_df_encoded):
     histo(fixed_full_df)
     print(f"!!!!!!!FINAL ADULT CSV CREATED!!!!!!!")
 
-
-def workflow():
-    models = {}
-
-
+# Runs the XGB workflow
+# Loads the adult.csv data set
+# Splits the data (clean and dirty data frames)
+# Makes the XGB model using the clean data frame
+# Tests the model
+# Uses the imputer to clean the dirty data frame
+# Merges the original clean set with the now clean dirty data frame
+# Creates a XGB model with the Merged data frame
+# Outputs the Merged data frame to 'outputs/XGB/' as 'full_adult_encoded_XGB.csv'
+# Tests the model
+# Creates the final CSV
 def XGB_workflow():
     print("####################-Starting XGB Workflow-####################\n")
     # Loads the data from csv
@@ -59,14 +67,23 @@ def XGB_workflow():
 
     # Makes a model with the merged data
     full_model, fX, fy = make_XGB_model(full_df_encoded)
-    full_df_encoded.to_csv("output/full_adult_encoded_XBG.csv")
+    full_df_encoded.to_csv("output/XGB/full_adult_encoded_XBG.csv")
     model_testing(full_model, fX, fy)
 
     create_final_csv(full_df_encoded)
 
     print("####################-Ending XGB Workflow-####################\n\n")
 
-
+# Runs the KNN workflow
+# Loads the adult.csv data set
+# Splits the data (clean and dirty data frames)
+# Makes the KNN model using the clean data frame
+# Tests the model
+# Uses the imputer to clean the dirty data frame
+# Merges the original clean set with the now clean dirty data frame
+# Creates a KNN model with the Merged data frame
+# Outputs the Merged data frame to 'outputs/KNN/' as 'full_adult_encoded_KNN.csv'
+# Tests the model
 def KNN_workflow():
     print("####################-Starting KNN Workflow-####################\n")
     # Loads the data from csv
@@ -92,11 +109,20 @@ def KNN_workflow():
 
     # Makes a model with the merged data
     full_model, fX, fy = make_KNN_model(full_df_encoded)
-    full_df_encoded.to_csv("output/full_adult_encoded_KNN.csv")
+    full_df_encoded.to_csv("output/KNN/full_adult_encoded_KNN.csv")
     model_testing(full_model, fX, fy)
     print("####################-Ending KNN Workflow-####################\n\n")
 
-
+# Runs the DTC workflow
+# Loads the adult.csv data set
+# Splits the data (clean and dirty data frames)
+# Makes the DTC model using the clean data frame
+# Tests the model
+# Uses the imputer to clean the dirty data frame
+# Merges the original clean set with the now clean dirty data frame
+# Creates a DTC model with the Merged data frame
+# Outputs the Merged data frame to 'outputs/DTC/' as 'full_adult_encoded_DTC.csv'
+# Tests the model
 def DTC_workflow():
     print("####################-Starting DTC Workflow-####################\n")
 
@@ -127,6 +153,16 @@ def DTC_workflow():
     model_testing(full_model, fX, fy)
     print("####################-Ending DTC Workflow-####################\n\n")
 
+# Runs the ETC workflow
+# Loads the adult.csv data set
+# Splits the data (clean and dirty data frames)
+# Makes the ETC model using the clean data frame
+# Tests the model
+# Uses the imputer to clean the dirty data frame
+# Merges the original clean set with the now clean dirty data frame
+# Creates a ETC model with the Merged data frame
+# Outputs the Merged data frame to 'outputs/ETC/' as 'full_adult_encoded_ETC.csv'
+# Tests the model
 def ETC_workflow():
     print("####################-Starting ETC Workflow-####################\n")
     # Loads the data from csv
@@ -161,6 +197,16 @@ def ETC_workflow():
     
     print("####################-Ending ETC Workflow-####################\n\n")
     
+# Runs the XGB K-FOLD workflow
+# Loads the adult.csv data set
+# Splits the data (clean and dirty data frames)
+# Encodes the categorical columns in borth clean and dirty data frame
+# Makes the XGB model using the clean data frame
+# Evaluates the model with K-FOLD using only the clean model and clean data frame
+# Uses the imputer to clean the dirty data frame
+# Merges the original clean set with the now clean dirty data frame
+# Creates a XGB model with the Merged data frame
+# Evaluates the model with K-FOLD using the Full model and Merged data frame
 def run_xgboost_kfold_workflow():
     print("####################-Starting XGB K-Fold Workflow-####################")
     df = loadData()
@@ -182,6 +228,16 @@ def run_xgboost_kfold_workflow():
     
     print("####################-Ending XGB K-Fold Workflow-####################\n")
 
+# Runs the KNN K-FOLD workflow
+# Loads the adult.csv data set
+# Splits the data (clean and dirty data frames)
+# Encodes the categorical columns in borth clean and dirty data frame
+# Makes the KNN model using the clean data frame
+# Evaluates the model with K-FOLD using only the clean model and clean data frame
+# Uses the imputer to clean the dirty data frame
+# Merges the original clean set with the now clean dirty data frame
+# Creates a KNN model with the Merged data frame
+# Evaluates the model with K-FOLD using the Full model and Merged data frame
 def run_knn_kfold_workflow():
     print("####################-Starting KNN K-Fold Workflow-####################")
     df = loadData()
@@ -203,6 +259,17 @@ def run_knn_kfold_workflow():
     
     print("####################-Ending KNN K-Fold Workflow-####################\n")
 
+
+# Runs the DTC K-FOLD workflow
+# Loads the adult.csv data set
+# Splits the data (clean and dirty data frames)
+# Encodes the categorical columns in borth clean and dirty data frame
+# Makes the DTC model using the clean data frame
+# Evaluates the model with K-FOLD using only the clean model and clean data frame
+# Uses the imputer to clean the dirty data frame
+# Merges the original clean set with the now clean dirty data frame
+# Creates a DTC model with the Merged data frame
+# Evaluates the model with K-FOLD using the Full model and Merged data frame
 def run_dtc_kfold_workflow():
     print("####################-Starting DTC K-Fold Workflow-####################")
     df = loadData()
@@ -224,6 +291,16 @@ def run_dtc_kfold_workflow():
     
     print("####################-Ending DTC K-Fold Workflow-####################\n")
 
+# Runs the ETC K-FOLD workflow
+# Loads the adult.csv data set
+# Splits the data (clean and dirty data frames)
+# Encodes the categorical columns in borth clean and dirty data frame
+# Makes the ETC model using the clean data frame
+# Evaluates the model with K-FOLD using only the clean model and clean data frame
+# Uses the imputer to clean the dirty data frame
+# Merges the original clean set with the now clean dirty data frame
+# Creates a ETC model with the Merged data frame
+# Evaluates the model with K-FOLD using the Full model and Merged data frame
 def run_etc_kfold_workflow():
     print("####################-Starting ETC K-Fold Workflow-####################")
     df = loadData()

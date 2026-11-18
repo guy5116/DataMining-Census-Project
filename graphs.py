@@ -7,7 +7,12 @@ import numpy as np
 
 from preprocessing import loadData
 
-
+# Creates a bar chart to show where data is missing
+# Loads the adult csv
+# Converts the missing value to '?'
+# Counts the number of '?' for each column that had some present
+# Creates a bar chart using the number of '?' as the Y axis and the X axis in the name of the category
+# Saves the chart in 'output/beforeProcessing/'
 def missingBarChart():
     df = loadData()
     df = df.apply(lambda s: s.str.strip() if s.dtype == "object" else s)
@@ -36,7 +41,7 @@ def missingBarChart():
     plt.tight_layout()
     output_dir = Path("output/beforeProcessing")
     plt.savefig(output_dir / "missing_values.png", dpi=200)
-    # plt.show()
+    plt.close()
 
 
 def histo(df):
