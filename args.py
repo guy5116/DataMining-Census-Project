@@ -42,7 +42,7 @@ def run_args(parser):
     missingBarChart()
     if args.xgb or args.all:
         XGB_workflow()
-        if args.knn:
+        if args.fold:
             run_xgboost_kfold_workflow()
     if args.knn or args.all:
         KNN_workflow()

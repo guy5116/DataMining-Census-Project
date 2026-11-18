@@ -149,7 +149,7 @@ def DTC_workflow():
 
     # Makes a model with the merged data
     full_model, fX, fy = make_DTC_model(full_df_encoded)
-    full_df_encoded.to_csv("output/full_adult_encoded_DTC.csv")
+    full_df_encoded.to_csv("output/DTC/full_adult_encoded_DTC.csv")
     model_testing(full_model, fX, fy)
     print("####################-Ending DTC Workflow-####################\n\n")
 
@@ -188,7 +188,7 @@ def ETC_workflow():
 
     # Makes a model with the merged data
     full_model, fX, fy = make_ETC_model(full_df_encoded)
-    full_df_encoded.to_csv('output/full_adult_encoded_ETC.csv')
+    full_df_encoded.to_csv('output/ETC/full_adult_encoded_ETC.csv')
     model_testing(full_model, fX, fy)
     
     # Extract and display feature importances
