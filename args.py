@@ -1,6 +1,6 @@
 import argparse
 import sys
-from graphs import missingBarChart
+from graphs import *
 from workflows import *
 
 txt = r"""
@@ -33,6 +33,11 @@ def parser_args():
     return parser
 
 def run_args(parser):
+    missingBarChart()
+    missingHeatmap()
+    capitalBoxPlots()
+    entropyTreePlot()
+    infoGainChart()
     args = parser.parse_args()
     print(f"{txt}\n")
     if len(sys.argv) == 1:
