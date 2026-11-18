@@ -28,7 +28,6 @@ def create_final_csv(full_df_encoded):
     )
     fixed_full_df = pd.concat([full_df_encoded[non_dummy_cols], decoded], axis=1)
     fixed_full_df.to_csv("output/final_adult.csv")
-    histo(fixed_full_df)
     print(f"!!!!!!!FINAL ADULT CSV CREATED!!!!!!!")
 
 # Runs the XGB workflow

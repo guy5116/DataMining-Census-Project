@@ -44,6 +44,10 @@ def missingBarChart():
     plt.savefig(output_dir / "missing_values.png", dpi=200)
     plt.close()
 
+
+# Generates a heat map for missing values
+# Shows the correlation between missing 'workclass' and 'occupation'
+# Their a a correlation where if one's missing the other is missing
 def missingHeatmap():
     df = loadData()
     missing_cols = df.columns[df.isna().any()]
@@ -66,13 +70,15 @@ def missingHeatmap():
     plt.savefig(output_dir / 'missing_heatmap.png', dpi=200)
     plt.close()
 
+# Creates a boxplot for capital gains
+# Most values are zero, but their are extreme outliers
 def capitalBoxPlots():
     df = loadData()
     cols = ['capital-gains', 'capital-loss']
 
     fig, axes = plt.subplots(1, 2, figsize=(9, 4))
     for ax, col in zip(axes, cols):
-        groups = [df.loc[df['income'] == label, col] for label in (True, False)]
+        groups = [df.loc[df['income'] == label, col] for label in (False, True)]
         ax.boxplot(groups, tick_labels=['<=50K', '>50K'])
         ax.set_yscale('symlog')
         zero_pct = (df[col] == 0).mean() * 100
@@ -83,20 +89,31 @@ def capitalBoxPlots():
     plt.tight_layout()
     output_dir = Path('output/beforeProcessing')
     plt.savefig(output_dir / 'capital_boxplots.png', dpi=200)
-    plt.close
+    plt.close()
 
-def histo(df):
+# Creates a histograph for the amount of people who make atleat 50K (True) vs people who make less (False)
+# Show the target value is true only 1/4~ of the time
+# Where as its false 3/4~ times
+def histo():
+    df = loadData()
     plt.hist(df["income"].astype(int), bins=[-0.5, 0.5, 1.5], rwidth=0.8)
-    plt.xticks([0, 1], ["True", "False"])
-    plt.show()
+    plt.xticks([0, 1], ["<=50K False", ">50K True"])
+    output_dir = Path('output/beforeProcessing')
+    plt.savefig(output_dir / 'targetHisto.png', dpi=200)
+    plt.close()
 
-
-
+# Creates a chart that shows the score for every feature by how much it changes
+# the entropy of income (Based entropy is 0.81 bits)
+# Then creates the bar chart (it only uses clean rows)
+# We found the strongest predictors are:
+# Relationship (0.166), marital-status (0.157), and education (0.093)
+# We found the weakest to be:
+# race (0.001), native-country (0.008), and workclass (0.009)
 def infoGainChart():
     df = loadData().dropna()
     ig = compute_info_gain(df)
 
-    ig = ig.sort_values('info_gain')
+    ig = ig.sort_values('info_gain')            # ascending, so barh puts the biggest on top
     fig, ax = plt.subplots(figsize=(8, 6))
     bars = ax.barh(ig['feature'], ig['info_gain'], color='#4C72B0')
     for bar, gain in zip(bars, ig['info_gain']):
@@ -113,10 +130,17 @@ def infoGainChart():
     plt.savefig(output_dir / 'info_gain.png', dpi=200)
     plt.close()
 
+# Creates a Tree Plot using a depth-3 decision tree with criterion='entropy'
+# so every split is highest entropy choice at that point, and draws it
+# We found that the first split is marita-status_Married-civ-spouse 
+# (Which is expected from the info gain chart)
+# 93% of unmarried people are <=50 unless they have over $7,074 capital gains
+# Married people are clase to 50/50 and education-num and capital gains then
+# seperate the >50k earners
 def entropyTreePlot(depth=3):
     df = loadData().dropna()
     X = pd.get_dummies(df.drop(columns=['income']))
-    y = df['income'].map({True: '<=50K', False: '>50K'})
+    y = df['income'].map({False: '<=50K', True: '>50K'})
 
     tree = DecisionTreeClassifier(criterion='entropy', max_depth=depth, random_state=42)
     tree.fit(X, y)

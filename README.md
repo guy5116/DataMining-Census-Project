@@ -28,10 +28,12 @@ pip install -r requirments.txt
 
 ## Running:
 ```bash
+python main -gaf    # Runs the graphs, models, and all K-Fold evaluations
 python main -af     # Runs all models and all K-Fold evaluations
 python main -a      # Runs all models, no K-Fold evaluations
 python main -xf     # Runs only XGBoost with K-Fold evaluations
 python main -x      # Runs only XGBoost, no K-Fold evaluations
+python main -g      # Runs only the graphs
 ```
 
 ## Flags
@@ -41,3 +43,4 @@ python main -x      # Runs only XGBoost, no K-Fold evaluations
 * *-e for ETC*
 * *-f to enable fold for selected model(s)*
 * *-a to enable all models*
+* *-g to enable all graphs

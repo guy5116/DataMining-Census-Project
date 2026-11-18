@@ -18,7 +18,7 @@ By:   Nolan Busch  ** Andrew Doubrava
     Brooke DeVaney ** Jackson Fletcher
     """
 
-
+# Creates the parser for flags
 def parser_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("-x", "--xgb", action="store_true", help="Runs the XGB workflow")
@@ -29,17 +29,23 @@ def parser_args():
     parser.add_argument("-f", "--fold", action="store_true", help="Adds the kfold workflow")
 
     parser.add_argument("-a", "--all", action="store_true", help="Runs all workflows")
+    
+    parser.add_argument("-g", "--graph", action="store_true", help="Runs all graphs")
 
     return parser
 
+# Collects the parser and runs the functions based on what the paser stores as True
 def run_args(parser):
-    missingBarChart()
-    missingHeatmap()
-    capitalBoxPlots()
-    entropyTreePlot()
-    infoGainChart()
-    args = parser.parse_args()
     print(f"{txt}\n")
+    args = parser.parse_args()
+
+    if args.graph:
+        histo()
+        missingBarChart()
+        missingHeatmap()
+        capitalBoxPlots()
+        entropyTreePlot()
+        infoGainChart()
     if len(sys.argv) == 1:
         parser.print_help()
         sys.exit(1)

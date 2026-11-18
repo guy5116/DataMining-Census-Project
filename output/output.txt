@@ -1,0 +1,258 @@
+
+  ____                           ____        _        
+ / ___|___ _ __  ___ _   _ ___  |  _ \  __ _| |_ __ _ 
+| |   / _ \ '_ \/ __| | | / __| | | | |/ _` | __/ _` |
+| |__|  __/ | | \__ \ |_| \__ \ | |_| | (_| | || (_| |
+ \____\___|_| |_|___/\__,_|___/ |____/ \__,_|\__\__,_|
+|  \/  (_)_ __ (_)_ __   __ _                         
+| |\/| | | '_ \| | '_ \ / _` |                        
+| |  | | | | | | | | | | (_| |                        
+|_|  |_|_|_| |_|_|_| |_|\__, |                        
+                        |___/                         
+By:   Nolan Busch  ** Andrew Doubrava
+    Brooke DeVaney ** Jackson Fletcher
+    
+
+####################-Starting XGB Workflow-####################
+
+Model Trained Success
+Accuracy:   87.29%
+F1 Score:   72.69%
+Roc:   92.84%
+              precision    recall  f1-score   support
+
+       False       0.89      0.94      0.92      4503
+        True       0.80      0.67      0.73      1530
+
+    accuracy                           0.87      6033
+   macro avg       0.85      0.81      0.82      6033
+weighted avg       0.87      0.87      0.87      6033
+
+DF1 Shape: (30162, 97)
+DF2 Shape: (2399, 98)
+Full DF Shape: (32561, 98)
+Model Trained Success
+Accuracy:   87.15%
+F1 Score:   70.72%
+Roc:   93.29%
+              precision    recall  f1-score   support
+
+       False       0.89      0.94      0.92      4941
+        True       0.79      0.64      0.71      1572
+
+    accuracy                           0.87      6513
+   macro avg       0.84      0.79      0.81      6513
+weighted avg       0.87      0.87      0.87      6513
+
+!!!!!!!FINAL ADULT CSV CREATED!!!!!!!
+####################-Ending XGB Workflow-####################
+
+
+####################-Starting XGB K-Fold Workflow-####################
+
+--- Evaluating XGB with CLEAN Data Only ---
+--- 10-Fold Cross-Validation Results ---
+Accuracy:  86.89%
+F1 Score:  71.13%
+ROC-AUC:   92.66%
+----------------------------------------
+DF1 Shape: (30162, 97)
+DF2 Shape: (2399, 98)
+Full DF Shape: (32561, 98)
+
+--- Evaluating XGB with FULL (Imputed) Dataset ---
+--- 10-Fold Cross-Validation Results ---
+Accuracy:  87.30%
+F1 Score:  70.92%
+ROC-AUC:   92.85%
+----------------------------------------
+####################-Ending XGB K-Fold Workflow-####################
+
+####################-Starting KNN Workflow-####################
+
+Model Trained Success
+Accuracy:   81.32%
+F1 Score:   60.36%
+Roc:   83.17%
+              precision    recall  f1-score   support
+
+       False       0.86      0.90      0.88      4503
+        True       0.65      0.56      0.60      1530
+
+    accuracy                           0.81      6033
+   macro avg       0.76      0.73      0.74      6033
+weighted avg       0.81      0.81      0.81      6033
+
+DF1 Shape: (30162, 97)
+DF2 Shape: (2399, 98)
+Full DF Shape: (32561, 98)
+Model Trained Success
+Accuracy:   81.79%
+F1 Score:   60.09%
+Roc:   84.14%
+              precision    recall  f1-score   support
+
+       False       0.87      0.90      0.88      4941
+        True       0.64      0.57      0.60      1572
+
+    accuracy                           0.82      6513
+   macro avg       0.75      0.73      0.74      6513
+weighted avg       0.81      0.82      0.81      6513
+
+####################-Ending KNN Workflow-####################
+
+
+####################-Starting KNN K-Fold Workflow-####################
+
+--- Evaluating KNN with CLEAN Data Only ---
+--- 10-Fold Cross-Validation Results ---
+Accuracy:  76.83%
+F1 Score:  41.38%
+ROC-AUC:   66.82%
+----------------------------------------
+DF1 Shape: (30162, 97)
+DF2 Shape: (2399, 98)
+Full DF Shape: (32561, 98)
+
+--- Evaluating KNN with FULL (Imputed) Dataset ---
+--- 10-Fold Cross-Validation Results ---
+Accuracy:  77.51%
+F1 Score:  41.16%
+ROC-AUC:   67.43%
+----------------------------------------
+####################-Ending KNN K-Fold Workflow-####################
+
+####################-Starting DTC Workflow-####################
+
+Model Trained Success
+Accuracy:   81.14%
+F1 Score:   63.24%
+Roc:   75.48%
+              precision    recall  f1-score   support
+
+       False       0.88      0.87      0.87      4503
+        True       0.63      0.64      0.63      1530
+
+    accuracy                           0.81      6033
+   macro avg       0.75      0.75      0.75      6033
+weighted avg       0.81      0.81      0.81      6033
+
+DF1 Shape: (30162, 97)
+DF2 Shape: (2399, 98)
+Full DF Shape: (32561, 98)
+Model Trained Success
+Accuracy:   81.58%
+F1 Score:   62.38%
+Roc:   75.34%
+              precision    recall  f1-score   support
+
+       False       0.88      0.87      0.88      4941
+        True       0.61      0.63      0.62      1572
+
+    accuracy                           0.82      6513
+   macro avg       0.75      0.75      0.75      6513
+weighted avg       0.82      0.82      0.82      6513
+
+####################-Ending DTC Workflow-####################
+
+
+####################-Starting DTC K-Fold Workflow-####################
+
+--- Evaluating DTC with CLEAN Data Only ---
+--- 10-Fold Cross-Validation Results ---
+Accuracy:  81.16%
+F1 Score:  62.60%
+ROC-AUC:   75.21%
+----------------------------------------
+DF1 Shape: (30162, 97)
+DF2 Shape: (2399, 98)
+Full DF Shape: (32561, 98)
+
+--- Evaluating DTC with FULL (Imputed) Dataset ---
+--- 10-Fold Cross-Validation Results ---
+Accuracy:  81.72%
+F1 Score:  62.38%
+ROC-AUC:   75.31%
+----------------------------------------
+####################-Ending DTC K-Fold Workflow-####################
+
+####################-Starting ETC Workflow-####################
+
+Model Trained Success
+Accuracy:   83.04%
+F1 Score:   64.98%
+Roc:   87.97%
+              precision    recall  f1-score   support
+
+       False       0.87      0.90      0.89      4503
+        True       0.68      0.62      0.65      1530
+
+    accuracy                           0.83      6033
+   macro avg       0.78      0.76      0.77      6033
+weighted avg       0.83      0.83      0.83      6033
+
+DF1 Shape: (30162, 97)
+DF2 Shape: (2399, 98)
+Full DF Shape: (32561, 98)
+Model Trained Success
+Accuracy:   83.43%
+F1 Score:   63.76%
+Roc:   88.18%
+              precision    recall  f1-score   support
+
+       False       0.88      0.91      0.89      4941
+        True       0.68      0.60      0.64      1572
+
+    accuracy                           0.83      6513
+   macro avg       0.78      0.76      0.77      6513
+weighted avg       0.83      0.83      0.83      6513
+
+
+--- Top Feature Importances (Extra Trees) ---
+                          Feature  Importance
+                           fnlwgt    0.164480
+                              age    0.154396
+                   hours-per-week    0.093827
+marital-status_Married-civ-spouse    0.080232
+                    capital-gains    0.066507
+     marital-status_Never-married    0.041101
+                    education-num    0.031986
+       occupation_Exec-managerial    0.026720
+                     capital-loss    0.022852
+                         sex_Male    0.021692
+####################-Ending ETC Workflow-####################
+
+
+####################-Starting ETC K-Fold Workflow-####################
+
+--- Evaluating ETC with CLEAN Data Only ---
+--- 10-Fold Cross-Validation Results ---
+Accuracy:  83.08%
+F1 Score:  64.05%
+ROC-AUC:   87.85%
+----------------------------------------
+DF1 Shape: (30162, 97)
+DF2 Shape: (2399, 98)
+Full DF Shape: (32561, 98)
+
+--- Evaluating ETC with FULL (Imputed) Dataset ---
+--- 10-Fold Cross-Validation Results ---
+Accuracy:  83.36%
+F1 Score:  63.42%
+ROC-AUC:   88.15%
+----------------------------------------
+
+--- Top Feature Importances (Extra Trees - K-Fold Dataset) ---
+                          Feature  Importance
+                           fnlwgt    0.164480
+                              age    0.154396
+                   hours-per-week    0.093827
+marital-status_Married-civ-spouse    0.080232
+                    capital-gains    0.066507
+     marital-status_Never-married    0.041101
+                    education-num    0.031986
+       occupation_Exec-managerial    0.026720
+                     capital-loss    0.022852
+                         sex_Male    0.021692
+####################-Ending ETC K-Fold Workflow-####################
+
