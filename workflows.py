@@ -191,6 +191,89 @@ def ETC_workflow():
     print_feature_importances(full_model, fX, top_n=10)
     
     print("####################-Ending ETC Workflow-####################\n\n")
+
+# Runs the RFC workflow
+# Loads the adult.csv data set
+# Splits the data (clean and dirty data frames)
+# Makes the RFC model using the clean data frame
+# Tests the model
+# Uses the imputer to clean the dirty data frame
+# Merges the original clean set with the now clean dirty data frame
+# Creates a RFC model with the Merged data frame
+# Outputs the Merged data frame to 'outputs/RFC/' as 'full_adult_encoded_RFC.csv'
+# Tests the model
+def RFC_workflow():
+    print("####################-Starting RFC Workflow-####################\n")
+    # Loads the data
+    df = loadData()
+
+    # Splits the already clean data with noisy data
+    clean_df, dirty_df = split_data(df)
+
+    # Encodes the data
+    clean_df_encoded = encode_dummies(clean_df)
+    dirty_df_encoded = encode_dummies(dirty_df)
+
+    #Makes a model with only clean data
+    c_model, X, y = make_RFC_model(clean_df_encoded)
+    model_testing(c_model, X, y)
+
+    #Cleans the data using our model
+    c_dirty_df = imputer_cleaning(dirty_df_encoded, clean_df_encoded)
+    
+    #Merges the now clean data with the already clean data
+    full_df = merge_data(clean_df_encoded, c_dirty_df)
+    full_df_encoded = encode_dummies(full_df)
+
+    #Makes a model with the merged data
+    full_model, fX, fy = make_RFC_model(full_df_encoded)
+    full_df_encoded.to_csv('output/RFC/full_adult_encoded_RFC.csv', errors="ignore")
+    model_testing(full_model, fX, fy)
+
+    #Extract and display feature importances
+    print("\n--- Top Feature Importances (Random Forest) ---")
+    print_feature_importances(full_model, fX, top_n=10)
+    print("####################-Ending RFC Workflow-####################\n\n")
+
+# Runs the SVM workflow
+# Loads the adult.csv data set
+# Splits the data (clean and dirty data frames)
+# Makes the SVM model using the clean data frame
+# Tests the model
+# Uses the imputer to clean the dirty data frame
+# Merges the original clean set with the now clean dirty data frame
+# Creates a SVM model with the Merged data frame
+# Outputs the Merged data frame to 'outputs/SVM/' as 'full_adult_encoded_SVM.csv'
+# Tests the model
+def SVM_workflow():
+    print("####################-Starting SVM Workflow-####################\n")
+
+    # Loads the data
+    df = loadData()
+
+    # Splits the already clean data with noisy data
+    clean_df, dirty_df = split_data(df)
+
+    # Encodes the data
+    clean_df_encoded = encode_dummies(clean_df)
+    dirty_df_encoded = encode_dummies(dirty_df)
+
+    # Makes a model with only clean data
+    c_model, X, y = make_SVM_model(clean_df_encoded)
+    model_testing(c_model, X, y)
+
+    # Cleans the data using our model
+    c_dirty_df = imputer_cleaning(dirty_df_encoded, clean_df_encoded)
+    
+    # Merges the now clean data with the already clean data
+    full_df = merge_data(clean_df_encoded, c_dirty_df)
+    full_df_encoded = encode_dummies(full_df)
+
+    # Makes a model with the merged data
+    full_model, fX, fy = make_SVM_model(full_df_encoded)
+    full_df_encoded.to_csv('output/SVM/full_adult_encoded_SVM.csv', errors="ignore")
+    model_testing(full_model, fX, fy)
+    print("####################-Ending SVM Workflow-####################\n\n")
     
 # Runs the XGB K-FOLD workflow
 # Loads the adult.csv data set
@@ -316,4 +399,66 @@ def run_etc_kfold_workflow():
     
     print("####################-Ending ETC K-Fold Workflow-####################\n")
 
+# Runs the RFC K-FOLD workflow
+# Loads the adult.csv data set
+# Splits the data (clean and dirty data frames)
+# Encodes the categorical columns in borth clean and dirty data frame
+# Makes the RFC model using the clean data frame
+# Evaluates the model with K-FOLD using only the clean model and clean data frame
+# Uses the imputer to clean the dirty data frame
+# Merges the original clean set with the now clean dirty data frame
+# Creates a RFC model with the Merged data frame
+# Evaluates the model with K-FOLD using the Full model and Merged data frame
+def run_rfc_kfold_workflow():
+    print("####################-Starting RFC K-Fold Workflow-####################")
+    df = loadData()
+    clean_df, dirty_df = split_data(df)
+    clean_df_encoded = encode_dummies(clean_df)
+    dirty_df_encoded = encode_dummies(dirty_df)
+    
+    print("\n--- Evaluating RFC with CLEAN Data Only ---")
+    c_model, _, _ = make_RFC_model(clean_df_encoded)
+    evaluate_with_kfold(c_model, clean_df_encoded.drop(columns=["income"]), clean_df_encoded["income"], n_splits=10)
+
+    c_dirty_df = imputer_cleaning(dirty_df_encoded, clean_df_encoded)
+    full_df = merge_data(clean_df_encoded, c_dirty_df)
+    full_df_encoded = encode_dummies(full_df)
+    
+    print("\n--- Evaluating RFC with FULL (Imputed) Dataset ---")
+    full_model, fX, _ = make_RFC_model(full_df_encoded)
+    evaluate_with_kfold(full_model, full_df_encoded.drop(columns=["income"]), full_df_encoded["income"], n_splits=10)
+    
+    print("\n--- Top Feature Importances (Random Forest - K-Fold Dataset) ---")
+    print_feature_importances(full_model, fX, top_n=10)
+    print("####################-Ending RFC K-Fold Workflow-####################\n")
+
+# Runs the SVM K-FOLD workflow
+# Loads the adult.csv data set
+# Splits the data (clean and dirty data frames)
+# Encodes the categorical columns in borth clean and dirty data frame
+# Makes the SVM model using the clean data frame
+# Evaluates the model with K-FOLD using only the clean model and clean data frame
+# Uses the imputer to clean the dirty data frame
+# Merges the original clean set with the now clean dirty data frame
+# Creates a SVM model with the Merged data frame
+# Evaluates the model with K-FOLD using the Full model and Merged data frame
+def run_svm_kfold_workflow():
+    print("####################-Starting SVM K-Fold Workflow-####################")
+    df = loadData()
+    clean_df, dirty_df = split_data(df)
+    clean_df_encoded = encode_dummies(clean_df)
+    dirty_df_encoded = encode_dummies(dirty_df)
+    
+    print("\n--- Evaluating SVM with CLEAN Data Only ---")
+    c_model, _, _ = make_SVM_model(clean_df_encoded)
+    evaluate_with_kfold(c_model, clean_df_encoded.drop(columns=["income"]), clean_df_encoded["income"], n_splits=10)
+
+    c_dirty_df = imputer_cleaning(dirty_df_encoded, clean_df_encoded)
+    full_df = merge_data(clean_df_encoded, c_dirty_df)
+    full_df_encoded = encode_dummies(full_df)
+    
+    print("\n--- Evaluating SVM with FULL (Imputed) Dataset ---")
+    full_model, _, _ = make_SVM_model(full_df_encoded)
+    evaluate_with_kfold(full_model, full_df_encoded.drop(columns=["income"]), full_df_encoded["income"], n_splits=10)
+    print("####################-Ending SVM K-Fold Workflow-####################\n")
 

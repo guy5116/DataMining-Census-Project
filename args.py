@@ -25,7 +25,9 @@ def parser_args():
     parser.add_argument("-k", "--knn", action="store_true", help="Runs the KNN workflow")
     parser.add_argument("-d", "--dtc", action="store_true", help="Runs the DTC workflow")
     parser.add_argument("-e", "--etc", action="store_true", help="Runs the ETC workflow")
-
+    parser.add_argument("-r", "--rfc", action="store_true", help="Runs the Random Forest workflow")
+    parser.add_argument("-s", "--svm", action="store_true", help="Runs the SVM workflow")
+   
     parser.add_argument("-f", "--fold", action="store_true", help="Adds the kfold workflow")
 
     parser.add_argument("-a", "--all", action="store_true", help="Runs all workflows")
@@ -67,4 +69,12 @@ def run_args(parser):
         ETC_workflow()
         if args.fold:
             run_etc_kfold_workflow()
+    if args.rfc or args.all:
+        RFC_workflow()
+        if args.fold:
+            run_rfc_kfold_workflow()
+    if args.svm or args.all:
+        SVM_workflow()
+        if args.fold:
+            run_svm_kfold_workflow()
     
