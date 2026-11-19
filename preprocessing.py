@@ -3,12 +3,18 @@ import pandas as pd
 from sklearn.experimental import enable_iterative_imputer
 from sklearn.impute import IterativeImputer
 
+
 # Loads the data from the adult.csv file
 # replaces '?' with np.nan
 # Drops the duplicates
 # Maps the target so under or equal to 50k is False where over is True
 # Returns the data frame
 def loadData():
+    cols = ["age", "workclass", "fnlwgt", "education", "education-num", "marital-status", "occupation", "relationship",   "race", "sex", "capital-gains", "capital-loss", "hours-per-week", "native-country", "income"]
+    df = pd.read_csv("adult.data", header=None, names=cols,
+                 na_values="?", skipinitialspace=True)
+
+    df.to_csv("adult.csv", index=False)
     # Load form adult.csv
     df = pd.read_csv("adult.csv").replace("?", np.nan)
 

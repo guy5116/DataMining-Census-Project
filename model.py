@@ -7,6 +7,7 @@ from sklearn.svm import SVC
 from sklearn.calibration import CalibratedClassifierCV
 from sklearn.metrics import accuracy_score, f1_score, roc_auc_score, classification_report
 from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import make_pipeline
 from sklearn.model_selection import StratifiedKFold, cross_validate
 from xgboost import XGBClassifier
 
@@ -159,18 +160,15 @@ def make_SVM_model(df):
         X, y, test_size=0.2, random_state=42
     )
 
-    # Scales the features for SVM optimization
-    scaler = StandardScaler()
-    X_train_scaled = scaler.fit_transform(X_train)
-    X_test_scaled = scaler.transform(X_test)
+    # Scaler lives inside the pipeline so K-Fold re-scales each fold
+    # (without it, cross_validate fits the RBF SVC on raw features and it effectively hangs)
+    model = make_pipeline(
+        StandardScaler(),
+        CalibratedClassifierCV(SVC(random_state=42), ensemble=False),
+    )
+    model.fit(X_train, y_train)
 
-    # Initializes and fits the calibrated SVM classifier
-    base_svc = SVC(random_state=42)
-    model = CalibratedClassifierCV(base_svc, ensemble=False)
-
-    model.fit(X_train_scaled, y_train)
-
-    return model, X_test_scaled, y_test
+    return model, X_test, y_test
 
 # Ranks and prints the top feature importances from a model
 # Extracts and sorts feature importances
@@ -223,7 +221,7 @@ def evaluate_with_kfold(model, X, y, n_splits=10):
     }
     
     # Run cross-validation
-    cv_results = cross_validate(model, X, y, cv=cv, scoring=scoring)
+    cv_results = cross_validate(model, X, y, cv=cv, scoring=scoring, n_jobs=-1)
     
     # Calculate mean percentages
     mean_acc = cv_results['test_accuracy'].mean() * 100
