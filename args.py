@@ -2,7 +2,7 @@ import argparse
 import sys
 from graphs.before_processing import missingBarChart, missingHeatmap, capitalBoxPlots, histo
 from graphs.info_gain import infoGainChart, entropyTreePlot
-from graphs.model_graphs import build_full_data, train_models, confusionMatices, rocCurve, precisionRecallCurves, kfoldBoxPlots, cleanVsImputed
+from graphs.model_graphs import build_full_data, train_models, confusionMatrices, rocCurve, precisionRecallCurves, kfoldBoxPlots, cleanVsImputed
 from workflows import (XGB_workflow, KNN_workflow, DTC_workflow, ETC_workflow,
                        run_xgboost_kfold_workflow, run_knn_kfold_workflow, run_dtc_kfold_workflow, run_etc_kfold_workflow)
 
@@ -42,11 +42,11 @@ def run_args(parser):
     print(f"{txt}\n")
     args = parser.parse_args()
     if args.models:
-        models = train_models(build_full_data())
-        confusionMatices(models)
+        df_encoded = build_full_data()
+        models = train_models(df_encoded)
+        confusionMatrices(models)
         rocCurve(models)
         precisionRecallCurves(models)
-        df_encoded = build_full_data()
         kfoldBoxPlots(models, df_encoded)
         cleanVsImputed(models)
     if args.graph:

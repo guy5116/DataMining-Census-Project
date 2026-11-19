@@ -14,12 +14,11 @@ def loadData():
 
     # Prep it for modeling
     # Set over 50k to true and under to false
-    df.drop_duplicates()
+    df = df.drop_duplicates()
     mapping = {"<=50K": False, ">50K": True}
     df["income"] = df["income"].map(mapping)
 
     # print(df.columns)
-
     # Prepare categorical columns to integers
     # nominal_cols = df.select_dtypes(include=["object", "category"]).columns.tolist()
     # df_encoded = pd.get_dummies(df, columns=nominal_cols, drop_first=True)

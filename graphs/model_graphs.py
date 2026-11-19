@@ -36,7 +36,7 @@ def train_models(df_encoded):
         models[name] = builder(df_encoded)
     return models
 
-def confusionMatices(models):
+def confusionMatrices(models):
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     fig, axes = plt.subplots(2, 2, figsize=(10, 9))
 
