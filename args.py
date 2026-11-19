@@ -3,8 +3,8 @@ import sys
 from graphs.before_processing import missingBarChart, missingHeatmap, capitalBoxPlots, histo
 from graphs.info_gain import infoGainChart, entropyTreePlot
 from graphs.model_graphs import build_full_data, train_models, confusionMatrices, rocCurve, precisionRecallCurves, kfoldBoxPlots, cleanVsImputed
-from workflows import (XGB_workflow, KNN_workflow, DTC_workflow, ETC_workflow,
-                       run_xgboost_kfold_workflow, run_knn_kfold_workflow, run_dtc_kfold_workflow, run_etc_kfold_workflow)
+from workflows import (XGB_workflow, KNN_workflow, DTC_workflow, ETC_workflow, RFC_workflow, SVM_workflow,
+                       run_xgboost_kfold_workflow, run_knn_kfold_workflow, run_dtc_kfold_workflow, run_etc_kfold_workflow, run_rfc_kfold_workflow, run_svm_kfold_workflow)
 
 txt = r"""
   ____                           ____        _        

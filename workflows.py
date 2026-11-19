@@ -1,6 +1,6 @@
 import pandas as pd
 
-from model import (make_XGB_model, make_KNN_model, make_DTC_model, make_ETC_model,
+from model import (make_XGB_model, make_KNN_model, make_DTC_model, make_ETC_model, make_RFC_model, make_SVM_model,
                    model_testing, print_feature_importances, evaluate_with_kfold)
 from preprocessing import loadData, split_data, encode_dummies, imputer_cleaning, merge_data
 
