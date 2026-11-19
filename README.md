@@ -28,12 +28,14 @@ pip install -r requirments.txt
 
 ## Running:
 ```bash
+python main -mgaf   # Runs all graphs, model based graphs, models, and K-Fold evaluations
 python main -gaf    # Runs the graphs, models, and all K-Fold evaluations
 python main -af     # Runs all models and all K-Fold evaluations
 python main -a      # Runs all models, no K-Fold evaluations
 python main -xf     # Runs only XGBoost with K-Fold evaluations
 python main -x      # Runs only XGBoost, no K-Fold evaluations
 python main -g      # Runs only the graphs
+python main -m      # Runs only model based graphs
 ```
 
 ## Flags
@@ -41,9 +43,12 @@ python main -g      # Runs only the graphs
 * *-k for KNN*
 * *-d for DTC*
 * *-e for ETC*
+* *-r for RTC*
+* *-s for SVM*
 * *-f to enable fold for selected model(s)*
 * *-a to enable all models*
-* *-g to enable all graphs
+* *-g to enable all graphs*
+* *-m to enable all model graphs*
 
 ## Graphs
 
