@@ -1,8 +1,8 @@
 import pandas as pd
 
-from graphs import *
-from model import *
-from preprocessing import *
+from model import (make_XGB_model, make_KNN_model, make_DTC_model, make_ETC_model,
+                   model_testing, print_feature_importances, evaluate_with_kfold)
+from preprocessing import loadData, split_data, encode_dummies, imputer_cleaning, merge_data
 
 # Rencodes the Data Frame with default categories
 # Switches it from multiple boolean columns to a categorical columns

@@ -1,7 +1,10 @@
 import argparse
 import sys
-from graphs import *
-from workflows import *
+from graphs.before_processing import missingBarChart, missingHeatmap, capitalBoxPlots, histo
+from graphs.info_gain import infoGainChart, entropyTreePlot
+from graphs.model_graphs import build_full_data, train_models, confusionMatrices, rocCurve, precisionRecallCurves, kfoldBoxPlots, cleanVsImputed
+from workflows import (XGB_workflow, KNN_workflow, DTC_workflow, ETC_workflow,
+                       run_xgboost_kfold_workflow, run_knn_kfold_workflow, run_dtc_kfold_workflow, run_etc_kfold_workflow)
 
 txt = r"""
   ____                           ____        _        
@@ -33,14 +36,21 @@ def parser_args():
     parser.add_argument("-a", "--all", action="store_true", help="Runs all workflows")
     
     parser.add_argument("-g", "--graph", action="store_true", help="Runs all graphs")
-
+    parser.add_argument('-m', '--models', action='store_true', help='Runs all model graphs')
     return parser
 
 # Collects the parser and runs the functions based on what the paser stores as True
 def run_args(parser):
     print(f"{txt}\n")
     args = parser.parse_args()
-
+    if args.models:
+        df_encoded = build_full_data()
+        models = train_models(df_encoded)
+        confusionMatrices(models)
+        rocCurve(models)
+        precisionRecallCurves(models)
+        kfoldBoxPlots(models, df_encoded)
+        cleanVsImputed(models)
     if args.graph:
         histo()
         missingBarChart()
