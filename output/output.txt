@@ -13,16 +13,13 @@ By:   Nolan Busch  ** Andrew Doubrava
     Brooke DeVaney ** Jackson Fletcher
     
 
-DF1 Shape: (30162, 97)
-DF2 Shape: (2399, 97)
-Full DF Shape: (32561, 97)
+DF1 Shape: (30139, 97)
+DF2 Shape: (2398, 97)
+Full DF Shape: (32537, 97)
 Training XGB...
 Training KNN...
 Training DTC...
 Training ETC...
-DF1 Shape: (30162, 97)
-DF2 Shape: (2399, 97)
-Full DF Shape: (32561, 97)
 Training XGB...
 Training KNN...
 Training DTC...
@@ -30,33 +27,33 @@ Training ETC...
 ####################-Starting XGB Workflow-####################
 
 Model Trained Success
-Accuracy:   87.29%
-F1 Score:   72.69%
-Roc:   92.84%
+Accuracy:   86.94%
+F1 Score:   71.72%
+Roc:   92.96%
               precision    recall  f1-score   support
 
-       False       0.89      0.94      0.92      4503
-        True       0.80      0.67      0.73      1530
+       False       0.89      0.95      0.92      4485
+        True       0.80      0.65      0.72      1543
 
-    accuracy                           0.87      6033
-   macro avg       0.85      0.81      0.82      6033
-weighted avg       0.87      0.87      0.87      6033
+    accuracy                           0.87      6028
+   macro avg       0.85      0.80      0.82      6028
+weighted avg       0.87      0.87      0.86      6028
 
-DF1 Shape: (30162, 97)
-DF2 Shape: (2399, 97)
-Full DF Shape: (32561, 97)
+DF1 Shape: (30139, 97)
+DF2 Shape: (2398, 97)
+Full DF Shape: (32537, 97)
 Model Trained Success
-Accuracy:   87.30%
-F1 Score:   70.99%
-Roc:   93.25%
+Accuracy:   87.23%
+F1 Score:   71.28%
+Roc:   92.75%
               precision    recall  f1-score   support
 
-       False       0.89      0.95      0.92      4941
-        True       0.79      0.64      0.71      1572
+       False       0.89      0.94      0.92      4929
+        True       0.78      0.65      0.71      1579
 
-    accuracy                           0.87      6513
-   macro avg       0.84      0.79      0.81      6513
-weighted avg       0.87      0.87      0.87      6513
+    accuracy                           0.87      6508
+   macro avg       0.84      0.80      0.82      6508
+weighted avg       0.87      0.87      0.87      6508
 
 !!!!!!!FINAL ADULT CSV CREATED!!!!!!!
 ####################-Ending XGB Workflow-####################
@@ -66,52 +63,52 @@ weighted avg       0.87      0.87      0.87      6513
 
 --- Evaluating XGB with CLEAN Data Only ---
 --- 10-Fold Cross-Validation Results ---
-Accuracy:  86.89%
-F1 Score:  71.13%
-ROC-AUC:   92.66%
+Accuracy:  86.96%
+F1 Score:  71.29%
+ROC-AUC:   92.64%
 ----------------------------------------
-DF1 Shape: (30162, 97)
-DF2 Shape: (2399, 97)
-Full DF Shape: (32561, 97)
+DF1 Shape: (30139, 97)
+DF2 Shape: (2398, 97)
+Full DF Shape: (32537, 97)
 
 --- Evaluating XGB with FULL (Imputed) Dataset ---
 --- 10-Fold Cross-Validation Results ---
-Accuracy:  87.29%
-F1 Score:  70.93%
-ROC-AUC:   92.83%
+Accuracy:  87.33%
+F1 Score:  71.07%
+ROC-AUC:   92.84%
 ----------------------------------------
 ####################-Ending XGB K-Fold Workflow-####################
 
 ####################-Starting KNN Workflow-####################
 
 Model Trained Success
-Accuracy:   81.32%
-F1 Score:   60.36%
-Roc:   83.17%
+Accuracy:   82.27%
+F1 Score:   62.97%
+Roc:   84.41%
               precision    recall  f1-score   support
 
-       False       0.86      0.90      0.88      4503
-        True       0.65      0.56      0.60      1530
+       False       0.86      0.90      0.88      4485
+        True       0.68      0.59      0.63      1543
 
-    accuracy                           0.81      6033
-   macro avg       0.76      0.73      0.74      6033
-weighted avg       0.81      0.81      0.81      6033
+    accuracy                           0.82      6028
+   macro avg       0.77      0.75      0.76      6028
+weighted avg       0.82      0.82      0.82      6028
 
-DF1 Shape: (30162, 97)
-DF2 Shape: (2399, 97)
-Full DF Shape: (32561, 97)
+DF1 Shape: (30139, 97)
+DF2 Shape: (2398, 97)
+Full DF Shape: (32537, 97)
 Model Trained Success
-Accuracy:   82.02%
-F1 Score:   60.72%
-Roc:   84.17%
+Accuracy:   82.59%
+F1 Score:   61.89%
+Roc:   84.46%
               precision    recall  f1-score   support
 
-       False       0.87      0.90      0.88      4941
-        True       0.64      0.58      0.61      1572
+       False       0.87      0.90      0.89      4929
+        True       0.66      0.58      0.62      1579
 
-    accuracy                           0.82      6513
-   macro avg       0.76      0.74      0.75      6513
-weighted avg       0.81      0.82      0.82      6513
+    accuracy                           0.83      6508
+   macro avg       0.77      0.74      0.75      6508
+weighted avg       0.82      0.83      0.82      6508
 
 ####################-Ending KNN Workflow-####################
 
@@ -120,52 +117,52 @@ weighted avg       0.81      0.82      0.82      6513
 
 --- Evaluating KNN with CLEAN Data Only ---
 --- 10-Fold Cross-Validation Results ---
-Accuracy:  76.83%
-F1 Score:  41.38%
-ROC-AUC:   66.82%
+Accuracy:  76.70%
+F1 Score:  41.27%
+ROC-AUC:   66.65%
 ----------------------------------------
-DF1 Shape: (30162, 97)
-DF2 Shape: (2399, 97)
-Full DF Shape: (32561, 97)
+DF1 Shape: (30139, 97)
+DF2 Shape: (2398, 97)
+Full DF Shape: (32537, 97)
 
 --- Evaluating KNN with FULL (Imputed) Dataset ---
 --- 10-Fold Cross-Validation Results ---
-Accuracy:  77.51%
-F1 Score:  41.16%
-ROC-AUC:   67.43%
+Accuracy:  77.59%
+F1 Score:  41.56%
+ROC-AUC:   67.44%
 ----------------------------------------
 ####################-Ending KNN K-Fold Workflow-####################
 
 ####################-Starting DTC Workflow-####################
 
 Model Trained Success
-Accuracy:   81.40%
-F1 Score:   63.97%
-Roc:   76.02%
+Accuracy:   80.97%
+F1 Score:   63.25%
+Roc:   75.39%
               precision    recall  f1-score   support
 
-       False       0.88      0.87      0.87      4503
-        True       0.63      0.65      0.64      1530
+       False       0.88      0.87      0.87      4485
+        True       0.63      0.64      0.63      1543
 
-    accuracy                           0.81      6033
-   macro avg       0.75      0.76      0.76      6033
-weighted avg       0.82      0.81      0.82      6033
+    accuracy                           0.81      6028
+   macro avg       0.75      0.75      0.75      6028
+weighted avg       0.81      0.81      0.81      6028
 
-DF1 Shape: (30162, 97)
-DF2 Shape: (2399, 97)
-Full DF Shape: (32561, 97)
+DF1 Shape: (30139, 97)
+DF2 Shape: (2398, 97)
+Full DF Shape: (32537, 97)
 Model Trained Success
-Accuracy:   81.68%
-F1 Score:   62.21%
-Roc:   75.13%
+Accuracy:   81.16%
+F1 Score:   61.42%
+Roc:   74.59%
               precision    recall  f1-score   support
 
-       False       0.88      0.88      0.88      4941
-        True       0.62      0.62      0.62      1572
+       False       0.88      0.87      0.88      4929
+        True       0.61      0.62      0.61      1579
 
-    accuracy                           0.82      6513
-   macro avg       0.75      0.75      0.75      6513
-weighted avg       0.82      0.82      0.82      6513
+    accuracy                           0.81      6508
+   macro avg       0.74      0.75      0.74      6508
+weighted avg       0.81      0.81      0.81      6508
 
 ####################-Ending DTC Workflow-####################
 
@@ -174,66 +171,66 @@ weighted avg       0.82      0.82      0.82      6513
 
 --- Evaluating DTC with CLEAN Data Only ---
 --- 10-Fold Cross-Validation Results ---
-Accuracy:  81.12%
-F1 Score:  62.52%
-ROC-AUC:   75.16%
+Accuracy:  81.09%
+F1 Score:  62.45%
+ROC-AUC:   75.09%
 ----------------------------------------
-DF1 Shape: (30162, 97)
-DF2 Shape: (2399, 97)
-Full DF Shape: (32561, 97)
+DF1 Shape: (30139, 97)
+DF2 Shape: (2398, 97)
+Full DF Shape: (32537, 97)
 
 --- Evaluating DTC with FULL (Imputed) Dataset ---
 --- 10-Fold Cross-Validation Results ---
-Accuracy:  81.75%
-F1 Score:  62.22%
-ROC-AUC:   75.15%
+Accuracy:  81.77%
+F1 Score:  62.56%
+ROC-AUC:   75.44%
 ----------------------------------------
 ####################-Ending DTC K-Fold Workflow-####################
 
 ####################-Starting ETC Workflow-####################
 
 Model Trained Success
-Accuracy:   83.04%
-F1 Score:   64.98%
-Roc:   87.97%
+Accuracy:   83.79%
+F1 Score:   66.60%
+Roc:   88.67%
               precision    recall  f1-score   support
 
-       False       0.87      0.90      0.89      4503
-        True       0.68      0.62      0.65      1530
+       False       0.88      0.91      0.89      4485
+        True       0.70      0.63      0.67      1543
 
-    accuracy                           0.83      6033
-   macro avg       0.78      0.76      0.77      6033
-weighted avg       0.83      0.83      0.83      6033
+    accuracy                           0.84      6028
+   macro avg       0.79      0.77      0.78      6028
+weighted avg       0.83      0.84      0.83      6028
 
-DF1 Shape: (30162, 97)
-DF2 Shape: (2399, 97)
-Full DF Shape: (32561, 97)
+DF1 Shape: (30139, 97)
+DF2 Shape: (2398, 97)
+Full DF Shape: (32537, 97)
 Model Trained Success
-Accuracy:   83.56%
-F1 Score:   64.12%
-Roc:   88.14%
+Accuracy:   83.94%
+F1 Score:   64.78%
+Roc:   88.04%
               precision    recall  f1-score   support
 
-       False       0.88      0.91      0.89      4941
-        True       0.68      0.61      0.64      1572
+       False       0.88      0.91      0.90      4929
+        True       0.69      0.61      0.65      1579
 
-    accuracy                           0.84      6513
-   macro avg       0.78      0.76      0.77      6513
-weighted avg       0.83      0.84      0.83      6513
+    accuracy                           0.84      6508
+   macro avg       0.79      0.76      0.77      6508
+weighted avg       0.83      0.84      0.84      6508
 
 
 --- Top Feature Importances (Extra Trees) ---
                           Feature  Importance
-                           fnlwgt    0.166469
-                              age    0.156354
-                   hours-per-week    0.095270
-marital-status_Married-civ-spouse    0.089303
-                    capital-gains    0.067234
-     marital-status_Never-married    0.035552
-                    education-num    0.034579
-       occupation_Exec-managerial    0.024183
-                     capital-loss    0.022956
-                         sex_Male    0.021544
+                           fnlwgt    0.166608
+                              age    0.156420
+                   hours-per-week    0.094929
+marital-status_Married-civ-spouse    0.092393
+                    capital-gains    0.066948
+     marital-status_Never-married    0.035353
+                    education-num    0.031069
+       occupation_Exec-managerial    0.024059
+                     capital-loss    0.022331
+                         sex_Male    0.021058
 ####################-Ending ETC Workflow-####################
 
 
@@ -241,32 +238,32 @@ marital-status_Married-civ-spouse    0.089303
 
 --- Evaluating ETC with CLEAN Data Only ---
 --- 10-Fold Cross-Validation Results ---
-Accuracy:  83.08%
-F1 Score:  64.05%
-ROC-AUC:   87.85%
+Accuracy:  82.92%
+F1 Score:  63.84%
+ROC-AUC:   87.79%
 ----------------------------------------
-DF1 Shape: (30162, 97)
-DF2 Shape: (2399, 97)
-Full DF Shape: (32561, 97)
+DF1 Shape: (30139, 97)
+DF2 Shape: (2398, 97)
+Full DF Shape: (32537, 97)
 
 --- Evaluating ETC with FULL (Imputed) Dataset ---
 --- 10-Fold Cross-Validation Results ---
 Accuracy:  83.31%
-F1 Score:  63.26%
-ROC-AUC:   88.12%
+F1 Score:  63.43%
+ROC-AUC:   88.00%
 ----------------------------------------
 
 --- Top Feature Importances (Extra Trees - K-Fold Dataset) ---
                           Feature  Importance
-                           fnlwgt    0.166469
-                              age    0.156354
-                   hours-per-week    0.095270
-marital-status_Married-civ-spouse    0.089303
-                    capital-gains    0.067234
-     marital-status_Never-married    0.035552
-                    education-num    0.034579
-       occupation_Exec-managerial    0.024183
-                     capital-loss    0.022956
-                         sex_Male    0.021544
+                           fnlwgt    0.166608
+                              age    0.156420
+                   hours-per-week    0.094929
+marital-status_Married-civ-spouse    0.092393
+                    capital-gains    0.066948
+     marital-status_Never-married    0.035353
+                    education-num    0.031069
+       occupation_Exec-managerial    0.024059
+                     capital-loss    0.022331
+                         sex_Male    0.021058
 ####################-Ending ETC K-Fold Workflow-####################
 
